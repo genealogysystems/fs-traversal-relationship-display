@@ -58,7 +58,32 @@
       prevLeft = path[i].left = prevLeft + change;
     }
     
-    console.log(path);
+    // Group people into rows based on height
+    var rowsMap = {};
+    for(var i = 0; i < path.length; i++){
+      var rowNumber = path[i].height;
+      if(!rowsMap[rowNumber]){
+        rowsMap[rowNumber] = [];
+      }
+      rowsMap[rowNumber].push(path[i]);
+    }
+    
+    // Sort rows in reverse according height
+    var rows = [];
+    for(var n in rowsMap){
+      rows.push({
+        number: parseInt(n),
+        // Sort people in the row too according to left position
+        people: rowsMap[n].sort(function(a, b){
+          return a.left - b.left;
+        })
+      });
+    }
+    rows.sort(function(a, b){
+      return b.number - a.number;
+    });
+    
+    console.log(rows);
   };
 
 }());
