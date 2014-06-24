@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>fs-traversal-relationship-display sandbox</title>
+    <script src="../fs-traversal-relationship-display.js"></script>
+    <script src="https://rawgit.com/victorquinn/chancejs/master/chance.js"></script>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script>        
+      
+      document.addEventListener('DOMContentLoaded', function(){
+        generate();
+      });
+      
+      /**
+       * Generate and display new path
+       */
+      function generate(){
+        var length = parseInt(document.getElementById('path-length').value);
+        var path = generatePath(length);
+        var display = FSTraversalRelationshipDisplay(path);
+        document.getElementById('display').innerHTML = display;
+      };
+      
+      /**
+       * Generate a random path.
+       * length is number of people in path.
+       */
+      function generatePath(length){
+        var path = [generatePerson()];
+        length--;
+        for(var i = 0; i < length; i++){
+          path.push(chance.pick(['child','father','mother','spouse']));
+          path.push(generatePerson());
+        }
+        return path;
+      };
+      
+      /**
+       * Generate a random person
+       */
+      function generatePerson(){
+        return {
+          id: chance.string({length: 7, pool: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'}),
+          display: {
+            name: chance.name({middle: true})
+          }
+        };
+      };
+    </script>
+    <style>
+      #path-length {
+        width: 75px;
+      }
+      
+      .panel {
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>fs-traversal-relationship-display sandbox</h1>
+      
+      <div class="form-inline">
+        <label>Path Length</label>
+        <input type="text" class="form-control" id="path-length" placeholder="path length" value="10">
+        <button class="btn btn-primary" onclick="generate();">Generate New Path</button>
+      </div>
+      
+      <div class="panel panel-default">
+        <div id="display" class="panel-body"><p>Loading...</p></div>
+      </div>
+    </div>
+  </body>
+</html>

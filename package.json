@@ -1,0 +1,16 @@
+{
+  "name": "fs-traversal-relationship-display",
+  "version": "0.0.0",
+  "description": "Generate an HTML display of an fs-traversal relationship path.",
+  "main": "fs-traversal-relationship-display.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/genealogysystems/fs-traversal-relationship-display.git"
+  },
+  "author": "Genealogy Systems",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/genealogysystems/fs-traversal-relationship-display/issues"
+  },
+  "homepage": "https://github.com/genealogysystems/fs-traversal-relationship-display"
+}
