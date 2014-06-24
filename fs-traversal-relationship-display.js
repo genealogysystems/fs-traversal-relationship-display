@@ -16,7 +16,8 @@
     
     // Calculate height
     var prevHeight = path[0].height = 0;
-    var prevChange = path[0].change = 0;
+    var prevChange = 0;
+    var minHeight = 0;
     path[0].corner = false;
     for(var i = 1; i < path.length; i++){
       var change = 0;
@@ -30,10 +31,19 @@
           break;
       }
       prevHeight = path[i].height = prevHeight + change;
+      minHeight = Math.min(prevHeight, minHeight);
       path[i-1].corner = (change === 1 && prevChange === -1) || (prevChange === 1 && change === -1);
-      prevChange = path[i].change = change;
+      prevChange = change;
     }
     path[path.length-1].corner = false;
+    
+    // Adjust heights so that the minimum is 0
+    if(minHeight < 0){
+      var change = Math.abs(minHeight);
+      for(var i = 0; i < path.length; i++){
+        path[i].height += change;
+      }
+    }
     
     // Calculate left
     var prevLeft = path[0].left = 0;
