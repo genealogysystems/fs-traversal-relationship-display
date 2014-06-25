@@ -1,11 +1,10 @@
-fs-traversal-relationship-display
-=================================
+# fs-traversal-relationship-display
 
 Generate an HTML display of an [fs-traversal](https://github.com/genealogysystems/fs-traversal) relationship path.
 
-[Demo](http://genealogysystems.github.io/fs-traversal-relationship-display/).
+[View the demo](http://genealogysystems.github.io/fs-traversal-relationship-display/).
 
-## Usage
+### Usage
 
 1. Include the JavaScript and CSS on the page.
 
