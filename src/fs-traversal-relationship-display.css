@@ -1,11 +1,12 @@
 .fst-row {
-  overflow: auto;
+  overflow: hidden;
 }
 
 .fst-person {
   width: 180px;
   padding: 25px;
   float: left;
+  position: relative;
 }
 
 .fst-name {
@@ -17,4 +18,49 @@
   text-transform: uppercase;
   font-size: 80%;
   text-align: center;
+}
+
+.fst-corner-top {
+  border-bottom: 2px solid #ccc;
+}
+
+.fst-corner-bottom {
+  border-top: 2px solid #ccc;
+}
+
+.fst-line-bottom,
+.fst-line-top {
+  border-right: 2px solid #ccc;
+  position: absolute;
+  left: 50%;
+  height: 50px;
+}
+
+.fst-line-bottom {
+  bottom: -35px;
+}
+
+.fst-corner-top .fst-line-bottom {
+  height: 15px;
+  bottom: 0;
+}
+
+.fst-line-top {
+  top: -35px;
+}
+
+.fst-line-left,
+.fst-line-right {
+  position: absolute;
+  border-top: 2px solid #ccc;
+  top: 50%;
+  width: 30px;
+}
+
+.fst-line-left {
+  left: -15px;
+}
+
+.fst-line-right {
+  right: -15px;
 }

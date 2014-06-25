@@ -8,21 +8,26 @@
     // Setup more simple data structure
     var path = [{
       person: traversalPath[0],
-      relationship: ''
+      relationship: '',
+      corner: '',
+      lines: []
     }];
     for(var i = 1; i < traversalPath.length; i += 2){
       path.push({
         person: traversalPath[i+1],
-        relationship: traversalPath[i]
+        relationship: traversalPath[i],
+        corner: '',
+        lines: []
       });
     }
     
-    // Calculate height
+    // Calculate height, corner, and lines
     var prevHeight = path[0].height = 0;
     var prevChange = 0;
     var minHeight = 0;
-    path[0].corner = false;
     for(var i = 1; i < path.length; i++){
+      
+      // Calculate height
       var change = 0;
       switch(path[i].relationship){
         case 'child':
@@ -35,10 +40,27 @@
       }
       prevHeight = path[i].height = prevHeight + change;
       minHeight = Math.min(prevHeight, minHeight);
-      path[i-1].corner = (change === 1 && prevChange === -1) || (prevChange === 1 && change === -1);
+      
+      // Calculate corner value for previous person
+      if(change === 1 && prevChange === -1){
+        path[i-1].corner = 'bottom';
+      } else if(prevChange === 1 && change === -1){
+        path[i-1].corner = 'top';
+      }
+      
+      // Calculate lines
+      if(path[i].relationship === 'child'){
+        path[i].lines.push('top');
+        path[i-1].lines.push('bottom');
+      } else if(path[i].relationship === 'mother' || path[i].relationship === 'father'){
+        path[i].lines.push('bottom');
+        path[i-1].lines.push('top');
+      } else if(path[i].relationship === 'spouse'){
+        path[i].lines.push('left');
+      }
+      
       prevChange = change;
     }
-    path[path.length-1].corner = false;
     
     // Adjust heights so that the minimum is 0
     if(minHeight < 0){
@@ -97,11 +119,15 @@
       var prevLeft = 0;
       for(var j = 0; j < rows[i].people.length; j++){
         var person = rows[i].people[j],
-            myLeft = person.left * boxWidth;
-        html += '<div class="fst-person" style="margin-left:'+(myLeft - prevLeft)+'px">';
+            myLeft = person.left * boxWidth,
+            cornerClass = person.corner ? ' fst-corner-' + person.corner : '';
+        html += '<div class="fst-person'+cornerClass+'" style="margin-left:'+(myLeft - prevLeft)+'px">';
         html += '<div class="fst-name">'+person.person.display.name+'</div>';
         html += '<div class="fst-role">'+getRelationshipString(person)+'</div>';
-        html += '</div>';
+        for(var k = 0; k < person.lines.length; k++){
+          html += '<div class="fst-line-'+person.lines[k]+'"></div>';
+        }
+        html += '</div>'; // end person
         prevLeft = myLeft + 180;
       }
       maxRight = Math.max(maxRight, prevLeft);
