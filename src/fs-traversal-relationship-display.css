@@ -1,0 +1,15 @@
+.fst-row {
+  overflow: auto;
+  border-style: solid;
+  border-color: #ccc;
+  border-width: 1px 0;
+}
+
+.fst-person {
+  width: 180px;
+  padding: 15px;
+  float: left;
+  border-style: solid;
+  border-color: #ccc;
+  border-width: 0px 1px;
+}

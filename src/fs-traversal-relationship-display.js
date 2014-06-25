@@ -1,5 +1,8 @@
 (function(){
 
+  // Width of a person box, in px
+  var boxWidth = 180;
+
   window.FSTraversalRelationshipDisplay = function(traversalPath){
   
     // Setup more simple data structure
@@ -47,7 +50,7 @@
     
     // Calculate left
     var prevLeft = path[0].left = 0;
-    for(var i = 1; i < path.length-1; i++){
+    for(var i = 1; i < path.length; i++){
       var change = 0;
       if(path[i-1].corner || path[i].corner){
         change = .5;
@@ -83,7 +86,26 @@
       return b.number - a.number;
     });
     
+    console.log(path);
     console.log(rows);
+    
+    // Output rows; use inline css positioning for now    
+    var html = '',
+        maxRight = 180;
+    for(var i = 0; i < rows.length; i++){
+      html += '<div class="fst-row">';
+      var prevLeft = 0;
+      for(var j = 0; j < rows[i].people.length; j++){
+        var person = rows[i].people[j],
+            myLeft = person.left * boxWidth;
+        html += '<div class="fst-person" style="margin-left:'+(myLeft - prevLeft)+'px"><div class="fst-name">'+person.person.display.name+'</div></div>';
+        prevLeft = myLeft + 180;
+      }
+      maxRight = Math.max(maxRight, prevLeft);
+      html += '</div>';
+    }
+    
+    return '<div class="fst-relationship-display" style="width:'+maxRight+'px">' + html + '</div>';
   };
 
 }());
