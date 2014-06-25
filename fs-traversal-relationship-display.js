@@ -114,9 +114,6 @@
       return b.number - a.number;
     });
     
-    console.log(path);
-    console.log(rows);
-    
     // Output rows; use inline css positioning for now    
     var html = '',
         maxRight = 180;
