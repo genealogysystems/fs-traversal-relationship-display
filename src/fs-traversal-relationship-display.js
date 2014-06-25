@@ -58,6 +58,12 @@
       } else if(path[i].relationship === 'spouse'){
         path[i].lines.push('left');
       }
+      if(path[i-1].corner === 'top'){
+        path[i-2].lines.push('top-right');
+        path[i].lines.push('top-left');
+      } else if(path[i-1].corner === 'bottom'){
+        path[i-1].lines.push('top-full');
+      }
       
       prevChange = change;
     }
