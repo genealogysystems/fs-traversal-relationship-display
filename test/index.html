@@ -45,6 +45,9 @@
       function generatePerson(){
         return {
           id: chance.string({length: 7, pool: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'}),
+          gender: {
+            type: 'http://gedcomx.org/' + chance.gender()
+          },
           display: {
             name: chance.name({middle: true})
           }

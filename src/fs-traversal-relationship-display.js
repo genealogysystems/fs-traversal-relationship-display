@@ -98,7 +98,10 @@
       for(var j = 0; j < rows[i].people.length; j++){
         var person = rows[i].people[j],
             myLeft = person.left * boxWidth;
-        html += '<div class="fst-person" style="margin-left:'+(myLeft - prevLeft)+'px"><div class="fst-name">'+person.person.display.name+'</div></div>';
+        html += '<div class="fst-person" style="margin-left:'+(myLeft - prevLeft)+'px">';
+        html += '<div class="fst-name">'+person.person.display.name+'</div>';
+        html += '<div class="fst-role">'+getRelationshipString(person)+'</div>';
+        html += '</div>';
         prevLeft = myLeft + 180;
       }
       maxRight = Math.max(maxRight, prevLeft);
@@ -106,6 +109,23 @@
     }
     
     return '<div class="fst-relationship-display" style="width:'+maxRight+'px">' + html + '</div>';
+  };
+  
+  function getRelationshipString(person){
+    var rel = person.relationship;
+    if(rel === ''){
+      return 'you';
+    }
+    else if(rel === 'child'){
+      if(person.person.gender.type === 'http://gedcomx.org/Male'){
+        return 'son';
+      } else if(person.person.gender.type === 'http://gedcomx.org/Female'){
+        return 'daughter';
+      } else {
+        return 'child';
+      }
+    }
+    return rel;
   };
 
 }());
