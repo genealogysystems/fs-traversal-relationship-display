@@ -13,7 +13,7 @@ Generate an HTML display of an [fs-traversal](https://github.com/genealogysystem
     <link rel="stylesheet" href="fs-traversal-relationship-display.css">
     ```
 
-2. Pass the result of `FSTraversal.`[`pathTo(id)`](https://github.com/genealogysystems/fs-traversal#pathtoid) directly into `FSTraversalRelationshipDisplay` to generate the html display.
+2. Pass the result of `FSTraversal.`[`pathTo(id)`](https://github.com/genealogysystems/fs-traversal#pathtoid) directly into `FSTraversalRelationshipDisplay` to generate the HTML display.
 
     ```javascript
     var path = traversal.pathTo(personId);
