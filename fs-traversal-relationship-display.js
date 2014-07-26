@@ -5,17 +5,12 @@
 
   window.FSTraversalRelationshipDisplay = function(traversalPath){
   
-    // Setup more simple data structure
-    var path = [{
-      person: traversalPath[0],
-      relationship: '',
-      corner: '',
-      lines: []
-    }];
-    for(var i = 1; i < traversalPath.length; i += 2){
+    // Modify path data structure
+    var path = [];
+    for(var i = 0; i < traversalPath.length; i ++){
       path.push({
-        person: traversalPath[i+1],
-        relationship: traversalPath[i],
+        person: traversalPath[i].person,
+        relationship: traversalPath[i].rel,
         corner: '',
         lines: []
       });

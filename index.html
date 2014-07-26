@@ -30,11 +30,13 @@
        * length is number of people in path.
        */
       function generatePath(length){
-        var path = [generatePerson()];
+        var path = [{rel:'start', person:generatePerson()}];
         length--;
         for(var i = 0; i < length; i++){
-          path.push(chance.pick(['child','father','mother','spouse']));
-          path.push(generatePerson());
+          path.push({
+            rel: chance.pick(['child','father','mother','spouse']),
+            person: generatePerson()
+          });
         }
         return path;
       };
