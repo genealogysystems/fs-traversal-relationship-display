@@ -3,7 +3,11 @@
   // Width of a person box, in px
   var boxWidth = 180;
 
-  window.FSTraversalRelationshipDisplay = function(traversalPath){
+  window.FSTraversalRelationshipDisplay = function(traversalPath, lang){
+  
+    if(!lang){
+      lang = 'en';
+    }
   
     // Modify path data structure
     var path = [];
@@ -121,7 +125,7 @@
             cornerClass = person.corner ? ' fst-corner-' + person.corner : '';
         html += '<div class="fst-person'+cornerClass+'" style="margin-left:'+(myLeft - prevLeft)+'px">';
         html += '<div class="fst-name">'+person.person.display.name+'</div>';
-        html += '<div class="fst-role">'+getRelationshipString(person)+'</div>';
+        html += '<div class="fst-role">'+getRelationshipString(person, lang)+'</div>';
         for(var k = 0; k < person.lines.length; k++){
           html += '<div class="fst-line-'+person.lines[k]+'"></div>';
         }
@@ -135,21 +139,58 @@
     return '<div class="fst-relationship-display" style="width:'+maxRight+'px">' + html + '</div>';
   };
   
-  function getRelationshipString(person){
+  /**
+   * Get the relationship string in the specified language
+   */
+  function getRelationshipString(person, lang){
     var rel = person.relationship;
-    if(rel === ''){
-      return 'you';
-    }
-    else if(rel === 'child'){
+    if(rel === 'child'){
       if(person.person.gender.type === 'http://gedcomx.org/Male'){
-        return 'son';
+        rel = 'son';
       } else if(person.person.gender.type === 'http://gedcomx.org/Female'){
-        return 'daughter';
+        rel = 'daughter';
       } else {
-        return 'child';
+        rel = 'child';
       }
     }
-    return rel;
+    else if(rel === 'spouse'){
+      if(person.person.gender.type === 'http://gedcomx.org/Male'){
+        rel = 'husband';
+      } else if(person.person.gender.type === 'http://gedcomx.org/Female'){
+        rel = 'wife';
+      } else {
+        rel = 'spouse';
+      }
+    }
+    return languages[lang][rel];
+  }
+  
+  /**
+   * Map of available languages and relationship strings
+   */
+  var languages = window.FSTraversalRelationshipDisplay.languages = {
+    en: {
+      child: 'child',
+      son: 'son',
+      daughter: 'daughter',
+      mother: 'mother',
+      father: 'father',
+      spouse: 'spouse',
+      wife: 'wife',
+      husband: 'husband',
+      start: 'start'
+    },
+    es: {
+      child: 'hijo',
+      son: 'hijo',
+      daughter: 'hija',
+      mother: 'madre',
+      father: 'padre',
+      spouse: 'cónyuge',
+      wife: 'esposa',
+      husband: 'marido',
+      start: 'principio'
+    }
   };
 
 }());

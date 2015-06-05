@@ -8,7 +8,7 @@
     <script src="fs-traversal-relationship-display.js"></script>
     <script src="https://rawgit.com/victorquinn/chancejs/master/chance.js"></script>
     <link rel="stylesheet" href="fs-traversal-relationship-display.css">
-    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <script>        
       
       document.addEventListener('DOMContentLoaded', function(){
@@ -21,7 +21,8 @@
       function generate(){
         var length = parseInt(document.getElementById('path-length').value);
         var path = generatePath(length);
-        var display = FSTraversalRelationshipDisplay(path);
+        var lang = document.getElementById('lang').value;
+        var display = FSTraversalRelationshipDisplay(path, lang);
         document.getElementById('display').innerHTML = display;
       };
       
@@ -57,14 +58,18 @@
       };
     </script>
     <style>
-      #path-length {
-        width: 75px;
+      .form-control {
+        width: 150px;
       }
       
       .panel {
         margin-top: 15px;
         overflow: auto;
         max-height: 700px;
+      }
+      
+      #generate-btn {
+        margin-top: 1.5em;
       }
     </style>
   </head>
@@ -74,10 +79,29 @@
       
       <div class="alert alert-warning"><p>The names and relationships are randomly generated using <a href="http://chancejs.com/" target="_blank">Chance.js.</a> The gender of the names may not match the gender of the relationships.</p></div>
       
+      <!--
       <div class="form-inline">
         <label>Path Length</label>
         <input type="text" class="form-control" id="path-length" placeholder="path length" value="10">
         <button class="btn btn-primary" onclick="generate();">Generate New Path</button>
+      </div>
+      -->
+      
+      <div class="row">
+        <div class="col-sm-4">
+          <label>Path Length</label>
+          <input type="text" class="form-control" id="path-length" placeholder="path length" value="10">
+        </div>
+        <div class="col-sm-4">
+          <label>Language</label>
+          <select id="lang" class="form-control">
+            <option value="en">English</option>
+            <option value="es">Spanish</option>
+          </select>
+        </div>
+        <div class="col-sm-4">
+          <button id="generate-btn" class="btn btn-primary" onclick="generate();">Generate New Path</button>
+        </div>
       </div>
 
       <div class="panel panel-default">

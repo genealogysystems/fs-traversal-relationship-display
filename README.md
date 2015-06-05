@@ -20,3 +20,11 @@ Generate an HTML display of an [fs-traversal](https://github.com/genealogysystem
     var relationshipHTML = FSTraversalRelationshipDisplay(path);
     ```
 3. Add the HTML to the DOM.
+
+4. _Optional_: You may specify a language.
+
+   ```js
+   FSTraversalRelationshipDisplay(path, 'es');
+   ```
+   
+   Currently only English `en` and Spanish `es` are supported. Defaults to `en`.
