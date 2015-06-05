@@ -58,18 +58,10 @@
       };
     </script>
     <style>
-      .form-control {
-        width: 150px;
-      }
-      
       .panel {
         margin-top: 15px;
         overflow: auto;
         max-height: 700px;
-      }
-      
-      #generate-btn {
-        margin-top: 1.5em;
       }
     </style>
   </head>
@@ -78,29 +70,22 @@
       <h1><a href="https://github.com/genealogysystems/fs-traversal-relationship-display">fs-traversal-relationship-display</a> sandbox</h1>
       
       <div class="alert alert-warning"><p>The names and relationships are randomly generated using <a href="http://chancejs.com/" target="_blank">Chance.js.</a> The gender of the names may not match the gender of the relationships.</p></div>
-      
-      <!--
-      <div class="form-inline">
-        <label>Path Length</label>
-        <input type="text" class="form-control" id="path-length" placeholder="path length" value="10">
-        <button class="btn btn-primary" onclick="generate();">Generate New Path</button>
-      </div>
-      -->
-      
+
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-md-2 col-sm-4">
           <label>Path Length</label>
           <input type="text" class="form-control" id="path-length" placeholder="path length" value="10">
         </div>
-        <div class="col-sm-4">
+        <div class="col-md-2 col-sm-4">
           <label>Language</label>
           <select id="lang" class="form-control">
             <option value="en">English</option>
             <option value="es">Spanish</option>
           </select>
         </div>
-        <div class="col-sm-4">
-          <button id="generate-btn" class="btn btn-primary" onclick="generate();">Generate New Path</button>
+        <div class="col-md-2 col-sm-4">
+          <label>&nbsp;</label><br>
+          <button class="btn btn-primary" onclick="generate();">Generate New Path</button>
         </div>
       </div>
 
